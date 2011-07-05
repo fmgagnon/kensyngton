@@ -1,0 +1,35 @@
+En gros, nous essayons de programmer le plus intelligemment possible (car notre but est d'apprendre à programmer) une version du jeu Kensington.
+
+Dernière modification : FG, 5 juillet.
+
+À faire bientôt:
+	Définition de toutes les bornes
+		- Comment juger l'AI?
+		- Quel est notre but en graphique (utilisation d'une librairie comme TkInter/pygame ou déploiement sur le Web?)
+		- Quelle licence?
+	
+À faire pour la version 0.01
+	    - processus : tout est jouable à deux joueurs sur la même machine.
+	    - graphique : encore en mode texte (notation seulement)
+
+À faire pour la version 0.1
+	    - processus : intégration d'un AI rudimentaire
+	    - graphique : utilisation d'une librairie	graphique (probablement TkInter/pygame)
+	    - documentation : disponibilité d'un readme
+
+Pour une éventuelle version 1
+	    processus : l'AI peut gagner
+	    graphique : 
+	    distribution d'un binaire
+	    documentation : site Web
+	    internationalisation : Français et Anglais
+	    légal : démarches pour entrer en contact avec les créateurs du jeu
+
+Pour une très hypothétique version 2 :
+	processus : perfectionnement de l'AI
+	graphique : création d'une version Web (Django?)
+	distribution : binaire + Web
+	documentation : 
+	internationalisation : Fr, An, Allemand, Espagnol
+	jeu en ligne : création d'un serveur multijoueur
+	légal : toujours essayer de parler à Jones+Taylor
