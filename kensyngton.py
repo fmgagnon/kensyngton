@@ -1,8 +1,8 @@
 KENSYNGTON
 ----------
 Une modeste implémentation du jeu de table Kensington.
-
-
+Jeu : (c) 1979 Brian Taylor et Peter Forbes
+Ce programme : (c) 2011 fmgagnon et ggoubert
 
 Version 0.000001 : Appeler cela une version est même un peu prématuré, je crois. (FG)
 Pour l'instant, rien ne «fonctionne», ce n'est qu'un squelette de quelques idées jetées là.
