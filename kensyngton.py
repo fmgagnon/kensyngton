@@ -89,21 +89,38 @@ def tour():
 
 def legal_phaseun(check):
     
+def phaseun_rouge():
+    # Je sépare les deux pour que la programmation de l'AI soit plus claire.
+    
+    # Rouge = AI
 
-def phaseun():
-    i = 0
-    while i < 14:
+def phaseun_bleu():
+    # Ici, le code pour le joueur humain.
+    
 	
-        while planche[point] != '':
-            # interroge sur le pion à placer
-            point = legal_phaseun(raw_input("Sur quel point mettre un pion? "))
+    while planche[point] != '':
+        # interroge sur le pion à placer
+        point = legal_phaseun(raw_input("Sur quel point mettre un pion? "))
 		# indique le pion sur 'planche'
 			
 		# indique le mouvement dans le 'journal'
 
-
+def phaseun(quicommence):
+    # Une phase facile à programmer : Les joueurs placent, tour à tour, des pions.
+    # C'est ici que quicommence est traité.
+    i = 0
+    if quicommence = 1:
+        while i < 14:
+            phaseun_rouge()
+            phaseun_bleu()
+            i += 1
+    else:
+        while i < 14;
+            phaseun_rouge()
+            phaseun_bleu()
+            i += 1    
 def phasedeux():
-    
+    # La phase du jeu la plus importante...    
 
 # Le jeu en tant que tel devrait appeler deux boucles principales : Le premier tour, où les joueurs emplissent la planche, et le second, où il s'agit de déplacements.
 
