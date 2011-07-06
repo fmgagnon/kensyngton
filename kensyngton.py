@@ -29,6 +29,7 @@ def legal():
 		leg = "Vous n'avez pas de pion sur ce point."
 
 
+
 	#	le point de destination est-il inoccupé?
 	if planche[mvt[2]] != '':
 		leg = "Le point de destination est occupé"
@@ -101,6 +102,7 @@ def phaseun_bleu():
     while planche[point] != '':
         # interroge sur le pion à placer
         point = legal_phaseun(raw_input("Sur quel point mettre un pion? "))
+
 		# indique le pion sur 'planche'
 			
 		# indique le mouvement dans le 'journal'
