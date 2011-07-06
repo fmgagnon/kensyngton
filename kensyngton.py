@@ -1,13 +1,3 @@
-KENSYNGTON
-----------
-Une modeste implémentation du jeu de table Kensington.
-Jeu : (c) 1979 Brian Taylor et Peter Forbes
-Ce programme : (c) 2011 fmgagnon et ggoubert
-
-Version 0.000001 : Appeler cela une version est même un peu prématuré, je crois. (FG)
-Pour l'instant, rien ne «fonctionne», ce n'est qu'un squelette de quelques idées jetées là.
-
-
 
 # l'audace a un nom : une liste et un dictionnaire pour, respectivement, le journal et la planche de jeu.
 journal = []
@@ -89,25 +79,35 @@ def mouvementforce():
 	journal.append(mvt)
 
 
+
 def tour():
-i = 0
-	while i = 0:
-		mvt = question()
-		mouvement(mvt)
-	verif()
+    i = 0
+    while i = 0:
+        mvt = question()
+        mouvement(mvt)
+        verif()
+
+def legal_phaseun(check):
+    
 
 def phaseun():
     i = 0
     while i < 14:
 	
-		while planche[point] != '':
-# interroge sur le pion à placer
-			point = raw_input("Sur quel point mettre un pion? ")
+        while planche[point] != '':
+            # interroge sur le pion à placer
+            point = legal_phaseun(raw_input("Sur quel point mettre un pion? "))
 		# indique le pion sur 'planche'
 			
 		# indique le mouvement dans le 'journal'
 
-def jeu():
-        phaseun()
-        
-        tour()
+
+def phasedeux():
+    
+
+# Le jeu en tant que tel devrait appeler deux boucles principales : Le premier tour, où les joueurs emplissent la planche, et le second, où il s'agit de déplacements.
+
+# La variable quicommence sert à décider... bon... devine... comme le jeu est symétrique, le même joueur commence les deux phases.
+quicommence = randint(0,1)
+phaseun(quicommence)
+phasedeux(quicommence)
