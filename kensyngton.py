@@ -1,3 +1,13 @@
+KENSYNGTON
+----------
+Une modeste implémentation du jeu de table Kensington.
+
+
+
+Version 0.000001 : Appeler cela une version est même un peu prématuré, je crois. (FG)
+Pour l'instant, rien ne «fonctionne», ce n'est qu'un squelette de quelques idées jetées là.
+
+
 
 # l'audace a un nom : une liste et un dictionnaire pour, respectivement, le journal et la planche de jeu.
 journal = []
