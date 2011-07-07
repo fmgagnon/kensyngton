@@ -72,6 +72,32 @@ def verif():
                 si oui : fin(coul,hex)
                 
 
+
+def phasedeux_bleu():
+    # Ici, le code pour le joueur humain.
+
+    while True:
+        # interroge sur le point d'origine
+        orig = raw_input("Quel pion déplace-t-on? ")
+        dest = raw_input("Vers quel point? ")
+        if orig not in planche:
+            print "Ce point d'origine n'existe pas."
+        if dest not in planche:
+            print "Ce point de destination n'existe pas."
+        if planche['orig'] != 'B':
+            print "Vous n'avez pas de pion sur ce point."
+        if planche['point'] != '':
+            print "Ce point est occupé."
+        # ici : teste si les points sont contigus.
+            print "Ces deux point ne sont pas contigus."
+        else:
+            planche['orig'] = ''        # on vide le point d'origine
+            planche['dest'] = 'B'       # on indique le pion sur la plane
+            journal.append("B:" + orig + ">" + dest)  # le mouvement est indiqué dans le journal
+            break                 # on brise la boucle pour finir le tour
+
+
+
 def phaseun_rouge():
     # Je sépare les deux pour que la programmation de l'AI soit plus claire.
     # Rouge = AI
@@ -83,13 +109,12 @@ def phaseun_rouge():
         point =    # ça prendrait un petit code pour choisir un point...
        
     planche['point'] = 'R'       # on indique le pion sur la plane
-    journal.append("R " + point)  # le mouvement est indiqué dans le journal
+    journal.append("R:" + point)  # le mouvement est indiqué dans le journal
 
 def phaseun_bleu():
     # Ici, le code pour le joueur humain.
-    tour = 0
 
-    while tour == 0:
+    while True:
         # interroge sur le pion à placer
         point = raw_input("Sur quel point mettre un pion? ")
         if point not in planche:
@@ -98,8 +123,8 @@ def phaseun_bleu():
             print "Ce point est occupé."
         else:
             planche['point'] = 'B'       # on indique le pion sur la plane
-            journal.append("B " + point)  # le mouvement est indiqué dans le journal
-            tour = 1                     # on brise la boucle pour finir le tour
+            journal.append("B:" + point)  # le mouvement est indiqué dans le journal
+            break                     # on brise la boucle pour finir le tour
 
 
 def phaseun(quicommence):
