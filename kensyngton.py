@@ -12,10 +12,6 @@ import random
 # Guillaume : Voir issue sur le github pour la notation
 planche = {'A1': '', 'A2': '', 'A3': '', 'B1': '', 'B2': '', 'B3': '', 'C1': '', 'C2': '', 'C3': '', 'D1': '', 'D2': '', 'D3': '', 'E1': '', 'E2': '', 'E3': '', 'F1': '', 'F2': '', 'F3': '', 'G1': '', 'G2': '', 'G3': '', 'H1': '', 'H2': '', 'H3': '', 'I1': '', 'I2': '', 'I3': '', 'J1': '', 'J2': '', 'J3': '', 'K1': '', 'K2': '', 'K3': '', 'L1': '', 'L2': '', 'L3': '', 'M1': '', 'M2': '', 'M3': '', 'N1': '', 'N2': '', 'N3': '', 'O1': '', 'O2': '', 'O3': '', 'P1': '', 'P2': '', 'P3': '', 'Q1': '', 'Q2': '', 'Q3': '', 'R1': '', 'R2': '', 'R3': '', 'S1': '', 'S2': '', 'S3': '', 'T1': '', 'T2': '', 'T3': '', 'U1': '', 'U2': '', 'U3': '', 'V1': '', 'V2': '', 'V3': '', 'W1': '', 'W2': '', 'W3': '', 'X1': '', 'X2': '', 'X3': '', 'NIL': ''}
 
-# pour que les fonctions puissent communiquer entre elles, je propose une liste appelée mvt qui comprend les infos et est ensuite encastrée dans le journal de jeu.
-# mvt = [coul, orig, dest]
-# coul peut être rouge ou bleu.
-
 # Tentative d'utiliser des classes pour manipuler les éléments du plateau
 # C'est une proposition de design pour l'instant, il faut regarder si c'est mieux qu'utiliser des objets de type liste dans lesquels on va piocher
 class Point:
@@ -91,34 +87,7 @@ def legal():
 
 	return leg
 
-def question():
-	leg = ''
-	while leg != "ok":
-		print leg
-		# demande quel mouvement effectuer -> mvt
-		legal(mvt)
-	return mvt
-
-
-def carre():
-
-def triangle():
-
-
-def verif():
-	# vérifie si un carré ou un triangle a été complété
-	# si oui, appeler les fonctions idoines.
-
-		carre(coul, lettre)
-
-
-		triangle(coul, deuxlettres)
-
-	# Vérifie si un hexagone de la bonne couleur a été complété
-                si oui : fin(coul,hex)
                 
-
-
 def phasedeux_bleu():
     # Ici, le code pour le joueur humain.
 
@@ -152,7 +121,7 @@ def phaseun_rouge():
 
     while planche['point'] != '':
         # choisit un point (pour l'instant au hasard)
-        point =    # ça prendrait un petit code pour choisir un point...
+        point = chr(randint(65,89)) + str(randint(1,3))
        
     planche['point'] = 'R'       # on indique le pion sur la plane
     journal.append("R:" + point)  # le mouvement est indiqué dans le journal
