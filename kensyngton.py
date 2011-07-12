@@ -35,7 +35,6 @@ for p in planche1:
     if 'h_'+p[1] not in hexagones:
         hexagones.append('h_' + p[1])
 
-<<<<<<< HEAD
 
 # On crée une liste contenant les noms des carrés du jeu. Les carrés sont nommés en fonction des deux hexagones qu'ils séparent (par exemple : 'c_12' ou 'c_3e')
 carres = [] 
@@ -59,8 +58,6 @@ for k in voisins.keys():  # réécrire en plus simple
 
 
 ###################################################################################################
-=======
->>>>>>> upstream/master
 # Tentative d'utiliser des classes pour manipuler les éléments du plateau
 # C'est une proposition de design pour l'instant, il faut regarder si c'est mieux qu'utiliser des objets de type liste dans lesquels on va piocher
 
@@ -175,7 +172,7 @@ def legal(mvt):
 
 	return leg
 
-<<<<<<< HEAD
+
 def question():
 	leg = ''
 	while leg != "ok":
@@ -196,8 +193,6 @@ def verif():
 
 	# Vérifie si un hexagone de la bonne couleur a été complété
                 si oui : fin(coul,hex)
-=======
->>>>>>> upstream/master
                 
 def phasedeux_bleu():
     # Ici, le code pour le joueur humain.
