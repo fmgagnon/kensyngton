@@ -1,54 +1,44 @@
 #! /usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-########################################################################################################################################################################################################
-# Introduction et imports
-
 import random
 
 
 
-# Un journal des coups joués dans une partie pour pouvoir rendre compte de la partie après coup
+
+
+## INITIALISATION DES LISTES DU JEU
+
+    # Un journal des coups joués dans une partie pour pouvoir rendre compte de la partie après coup :
 journal = []
 
 
-
-        
-######################################################################################################################################################################################################
-# Initialisation du plateau de jeu 
-#######################################################################################################################################################################################################
-######################################################################################################################################################################################################
-    
-    # Nouvelle nomenclature pour le plateau de jeu. 'planche' répertorie les noms des points.
-    # Est-ce-que le point 'NIL' est vraiment utile ?
+    # Le plateau de jeu, 'planche' répertorie les noms des points:
 planche = ['A1','B1','C1','I1','J1','K1','C2','D2','E2','G2','H2','I2','H3','G3','F3','S3','R3','Q3','H4','Q4',
     'P4','O4','J4','I4','J5','O5','N5','M5','L5','K5','O6','P6','V6','W6','X6','N6','P7','Q7','R7','T7','U7',
     'V7','Aa','Ba','Bb','Cb','Db','Dc','Ec','Ed','Gd','Fd','Fe','Se','Sf','Rf','Tf','Tg','Ug','Uh','Vh',
-    'Wh','Wi','Xi','Xj','Nj','Mj','Mk','Lk','Ll','Kl','Al','NIL']
-
-planche1 = planche #planche1 sera utilisé pour ne pas avoir le point 'NIL'
-planche1.remove('NIL')
+    'Wh','Wi','Xi','Xj','Nj','Mj','Mk','Lk','Ll','Kl','Al']
 
     # Dictionnaire pour définir les triangles qui sont proches les uns des autres. À un nom de triangle est associé la liste de ses voisins directs. C'est une information nécessaire pour avoir la géométrie du plateau. 
 voisins = {'A':['B','K'], 'B': ['A','C'],'C':['B','D','I'],'D':['C','E'],'E':['D','G'],'F':['G','S'],'G':['E','F','H'],'H':['G','I','Q'],'I':['C','H','J'],'J':['I','K','O'],'K':['A','J','L'],'L':['K','M'],'M':['L','N'],'N':['M','O','X'],'O':['J','N','P'],'P':['O','Q','V'],'Q':['H','P','R'],'R':['Q','S','T'],'S':['F','R'],'T':['R','U'],'U':['T','V'],'V':['U','P','W'],'W':['V','X'],'X':['W','N']}
 
     
-# On crée une liste contenant le noms des triangles du jeu
+    # On crée une liste contenant le noms des triangles du jeu
 triangles = voisins.keys()
     
-# On crée une liste contenant les noms des hexagones du jeu, nommés h_1,h_2,...,h_a...
+    # On crée une liste contenant les noms des hexagones du jeu, nommés h_1,h_2,...,h_a...
 hexagones = []
-for p in planche1:
+for p in planche:
     if 'h_'+p[1] not in hexagones:
         hexagones.append('h_' + p[1])
 
 
-# On crée une liste contenant les noms des carrés du jeu. Les carrés sont nommés en fonction des deux hexagones qu'ils séparent (par exemple : 'c_12' ou 'c_3e')
+    # On crée une liste contenant les noms des carrés du jeu. Les carrés sont nommés en fonction des deux hexagones qu'ils séparent (par exemple : 'c_12' ou 'c_3e')
 carres = [] 
 for k in voisins.keys():  # On cherche parmi les triangles voisins les points qui sont sur le même hexagone
     for t in voisins[k]:
         Z = []
-        for p in planche1:            
+        for p in planche:            
             if (p[0] == t or p[0] == k):
                 Z.append(p[1])
         Z1 = []           
@@ -60,11 +50,12 @@ for k in voisins.keys():  # On cherche parmi les triangles voisins les points qu
         if a not in carres: 
             carres.append('c_'+a)
 
-######################################################################################################################################################################################################
-######################################################################################################################################################################################################
-# On utilise une classe pour décrire les points du plateau et leur état
 
 
+
+
+
+## CLASSES POUR LES POINTS
 
 
 class Point:
@@ -82,10 +73,11 @@ class Point:
     def changement(self, nouvel_etat): #etat est un str, méthode à appliquer quand un mouvement a été déclaré valide pour changer l'état d'un point
         self.precedent = self.etat
         self.etat = nouvel_etat
-        
-######################################################################################################################################################################################################        
-######################################################################################################################################################################################################
-    
+
+
+
+
+## INITIALISATION DES CLASSES DU TABLEAU DE JEU    
 # On "classifie" le tableau de jeu, on crée des instance de la classe Point pour chaque point et on les range dans des listes de 3, 4 et 6 élements pour représenter les triangles, carrés et hexagones du tableau de jeu.
 # J'utilise la fonction "globals()" pour créer des variables ayant le nom d'élements préexistant (dans les listes planche, triangle, carres et hexagone)
 
@@ -103,13 +95,15 @@ for k in hexagones:
         
         
         
-for i in planche1:
+for i in planche:
    globals()[i] = Point(i) # On créé ici un objet de la classe "Point" pour chaque maille du tableau de jeu. Ça permet de déterminer et manipuler leur état facilement.
            
    if globals()[i] not in globals()[i[0]]:
        globals()[i[0]].append(globals()[i]) # ajoute le point i au triangle adéquat, chaque triangle est une liste de Points    
    if globals()[i] not in globals()['h_'+i[1]]:
        globals()['h_'+i[1]].append(globals()[i]) # ajoute le point i à l'hexagone adéquat, chaque hexagone est une liste de Points
+
+
 
 # l'ajout des carrés est un peu plus compliqué, chaque point peut appartenir à 2 carrés
 # On remplit les carrés mais on donne aussi une valeur à tous les attributs Point.carres, Point.carres_nom pour tous les point de la planche      
@@ -131,19 +125,21 @@ for t in triangles:         # commenter
                 w.carres.append(globals()['c_'+z[0]+z[1]])
                 w.carres_noms.append('c_'+z[0]+z[1]) 
                  
-######################################################################################################################################################################################################
-######################################################################################################################################################################################################    
-# Fonctions à utiliser pendant le déroulement de la partie
+                 
 
 
+
+## TESTS
+
+    # Deux triangles sont-ils voisins?
 def est_voisin(str1, str2): #vérifie si deux points sont sur des triangles voisins ou si deux triangles sont voisins
     if str1[0] in voisins[str2[0]]:
         return True
       
+
+
         
-def fin(coul):
-    print coul + " a gagné!"        
-    quit()
+
 
     
 # pour que les fonctions puissent communiquer entre elles, je propose une liste appelée mvt qui comprend les infos et est ensuite encastrée dans le journal de jeu.
@@ -203,10 +199,45 @@ def verif():
          
          return [] # Il faut réécrire les vérifications pour les carrés et les triangles en tenant compte de la structure des Poins()
          
-                
-def phasedeux_bleu():
-    # Ici, le code pour le joueur humain.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## PHASES DE JEU
+
+
+    # Dernière phase : la fin
+def fin(coul):
+    print coul + " a gagné!"        
+    quit()
+
+
+    # Le joueur force un mouvement d'un pion rouge (ordinateur)
+def forcerouge():
+
+
+    # L'ordinateur force un mouvement d'un pion bleu (joueur)
+def forcebleu():
+
+
+    # Déplacement de l'ordinateur
+def phasedeux_rouge():
+
+
+
+    # Déplacement du joueur humain.      
+def phasedeux_bleu():
     while True:
         # interroge sur le point d'origine
         orig = raw_input("Quel pion déplace-t-on? ")
@@ -229,10 +260,8 @@ def phasedeux_bleu():
 
 
 
+    # Pions de l'ordinateur.
 def phaseun_rouge():
-    # Je sépare les deux pour que la programmation de l'AI soit plus claire.
-    # Rouge = AI
-
     point = 'NIL'       # un petit bidouillis pour pouvoir initier la boucle.
 
     while planche['point'] != '':
@@ -242,9 +271,9 @@ def phaseun_rouge():
     planche['point'] = 'R'       # on indique le pion sur la plane
     journal.append("R:" + point)  # le mouvement est indiqué dans le journal
 
-def phaseun_bleu():
-    # Ici, le code pour le joueur humain.
 
+    # Pions du joueur humain.
+def phaseun_bleu():
     while True:
         # interroge sur le pion à placer
         point = raw_input("Sur quel point mettre un pion? ")
@@ -258,6 +287,7 @@ def phaseun_bleu():
             break                     # on brise la boucle pour finir le tour
 
 
+    # Mise en place des pions
 def phaseun(quicommence):
     # Une phase facile à programmer : Les joueurs placent, tour à tour, des pions.
     # C'est ici que quicommence est traité.
@@ -273,6 +303,7 @@ def phaseun(quicommence):
             phaseun_bleu()
             i += 1
 
+    #
 def phasedeux():
     # La phase du jeu la plus importante...    
     return []
