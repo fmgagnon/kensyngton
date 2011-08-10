@@ -135,37 +135,27 @@ for t in triangles:         # commenter
 def est_voisin(str1, str2): #vérifie si deux points sont sur des triangles voisins ou si deux triangles sont voisins
     if str1[0] in voisins[str2[0]]:
         return True
-      
-
-
-        
-
 
     
-# pour que les fonctions puissent communiquer entre elles, je propose une liste appelée mvt qui comprend les infos et est ensuite encastrée dans le journal de jeu.
-# mvt = [coul, orig, dest, forced]
-# coul peut être rouge (R) ou bleu (B).   
-    
+    # Un mouvement est-il légal?    
 def legal(mvt):
     leg = "ok"   
-	# vérifie si un geste est légal
-	# plusieurs choses :
-	#	les points sont-ils contigus?
 
+    	#	les points sont-ils contigus?
     if (mvt[1].name[0] == mvt[2].name[0] or (mvt[1].name[1] == mvt[2].name[1] and est_voisin(mvt[1],mvt[2]))) == False:
         leg = "Les deux points ne sont pas contigus." # Le mouvement est possible si les deux points sont sur le même triangle ou sur deux triangles voisins et sur le même hexagone
-        
    
-
-	#	le point de départ est-il occupé par un pion de la couleur du joueur?
+   
+	    #	le point de départ est-il occupé par un pion de la couleur du joueur?
 	if mvt[1].etat != mvt[0]:
 		leg = "Vous n'avez pas de pion sur ce point."
 
 
-
-	#	le point de destination est-il inoccupé?
+	    #	le point de destination est-il inoccupé?
 	if mvt[2].etat != 'vide':
 		leg = "Le point de destination est occupé."
+		
+		
 		
 	#	un carré ou un triangle formé récemment a-t-il été reformé? Chaque point appartenant à un triangle et un seul on peut ếcrire une fonction
 	
@@ -225,15 +215,15 @@ def fin(coul):
 
     # Le joueur force un mouvement d'un pion rouge (ordinateur)
 def forcerouge():
-
+    return 0
 
     # L'ordinateur force un mouvement d'un pion bleu (joueur)
 def forcebleu():
-
+    return 0
 
     # Déplacement de l'ordinateur
 def phasedeux_rouge():
-
+    return 0
 
 
     # Déplacement du joueur humain.      
@@ -309,9 +299,9 @@ def phasedeux():
     return []
 
 
-# Le jeu en tant que tel devrait appeler deux boucles principales : Le premier tour, où les joueurs emplissent la planche, et le second, où il s'agit de déplacements.
+    # Le jeu en tant que tel devrait appeler deux boucles principales : Le premier tour, où les joueurs emplissent la planche, et le second, où il s'agit de déplacements.
 
-# La variable quicommence sert à décider... bon... devine... comme le jeu est symétrique, le même joueur commence les deux phases.
+    # Pile ou face.
 quicommence = random.randint(0,2)
 #phaseun(quicommence)
 #phasedeux(quicommence)
