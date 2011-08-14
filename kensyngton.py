@@ -5,8 +5,6 @@ from random import randint
 
 
 
-
-
 ## INITIALISATION DES LISTES DU JEU
 
     # Un journal des coups joués dans une partie pour pouvoir rendre compte de la partie après coup :
@@ -154,77 +152,84 @@ def legal(mvt):
    
    
 	    #	le point de départ est-il occupé par un pion de la couleur du joueur?
-	elif mvt[1].etat != mvt[0]:
-		leg = "Vous n'avez pas de pion sur ce point."
-
+    elif mvt[1].etat != mvt[0]:
+        leg = "Vous n'avez pas de pion sur ce point."
 
 	    #	le point de destination est-il inoccupé?
-	elif mvt[2].etat != 'vide':
-		leg = "Le point de destination est occupé."
-		
-		
-		
-		
+    elif mvt[2].etat != 'vide':
+        leg = "Le point de destination est occupé."
+
     elif mvt[2].triangle[0].precedent == mvt[2].triangle[1].precedent == mvt[2].triangle[2].precedent == mvt[0]:   
         leg = "Il n'est pas permis de reformer un triangle avant deux coups."      
      # Si les 3 points appartenaient le tour précédent au joueur, il ne peut pas reformer le triangle.
-     
      
     else: 
         for i in mvt[2].carres: 
             if i[0].precedent+i[1].precedent+i[2].precedent+i[3].precedent == 4 * mvt[0]:
     # Si les 4 points appartenaient le tour précédent au joueur, il ne peut pas reformer le carré.  
                 leg = "Il n'est pas permis de reformer un carré avant deux coups."	
-            
-        
     return leg
 
 
+def verif():        # On fait un petit tour des fomes pour trouver les triangles et les carrés.
+                    # POUR L'INSTANT EN PSEUDO-CODE.
+#    for i in carrés:
+#        if (p1.etat == p2.etat == p3.etat == p4.etat) AND (p1.etat != p1.precedent OR p2.etat != p2.precedent OR p3.etat != p3.precedent OR p4.etat != p4.precedent)
+#             if p1.etat == 'B':
+#                forcerouge()
+#                forcerouge()
+#             else:
+#                forcebleu()
+#                forcebleu()
+#         else:
+#            break
+#    for i in triangles
+#        if (p1.etat == p2.etat == p3.etat) AND (p1.etat != p1.precedent OR p2.etat != p2.precedent OR p3.etat != p3.precedent)
+#             if p1.etat == 'B':
+#                forcerouge()
+#             else:
+#                forcebleu()
+#        else:
+#            break
+#    for i in hexagones
+#        if (p1.etat == p2.etat == p3.etat == p4.etat == p5.etat == p6.etat) AND (p1.etat == 'R' OR p2.etat == 'B')
+#             if p1.etat == 'B':
+#                fin('Le joueur')
+#             else:
+#                 fin('La machine')
+#         else:
+#              break
 
-
-def verif(mvt): # À faire
-	# vérifie si un carré ou un triangle a été complété
-	# si oui, appeler les fonctions idoines (mvt_force() ou fin(coul)).
-    # vérifier si un hexagone de la bonne couleur a été complété, si oui déclarer la victoire.
-         
-    return [] # Il faut réécrire les vérifications pour les carrés et les triangles en tenant compte de la structure des objets de type Points
  
+## IMPRESSION DE L'ÉTAT DE TOUS LES POINTS
 
-
-
-
-
+def etatdetous():
+    for k in triangles:             # test pour vérifier l'état des points après la phase 1
+        for l in k:
+            print l.name, ':', l.etat, ':',l.precedent
 
 
 ## PHASES DE JEU
 
-
-    # Dernière phase : la fin
-def fin(coul):
+def fin(coul):              # Dernière phase : la fin
     print coul + " a gagné!"        
     quit()
 
 
-    # Le joueur force un mouvement d'un pion rouge (ordinateur)
-def forcerouge():
+def forcerouge():           # Le joueur force un mouvement d'un pion rouge (ordinateur)
     return 0
 
-    # L'ordinateur force un mouvement d'un pion bleu (joueur)
-def forcebleu():
+
+def forcebleu():            # L'ordinateur force un mouvement d'un pion bleu (joueur)
     return 0
 
-    # Déplacement de l'ordinateur
-def phasedeux_rouge(): # À faire
+
+def phasedeux_rouge():          # Déplacement de l'ordinateur
     # Il faut écrire la fonction d'intelligence artificielle....
     # Une partie va être générale et ressembler beaucoup à phasedeux_bleu(). Le gros du codage va consiste à remplacer raw_input du joueur humain par une décision automatique (pas trop stupide). On pourra donc créer une fonction à part pour le choix du mouvement par l'intelligence artificielle.
     return[]
 
-
-
-    # Déplacement du joueur humain.      
-def phasedeux_bleu():
-    # Ici, le code pour le joueur humain.
-    # Créer la liste mvt à partir des données fournies par le joueur et utiliser la fonction legal(mvt)
+def phasedeux_bleu():                   # Déplacement du joueur humain.  
     while True:
         # interroge sur le point d'origine et de destination
         orig = raw_input("Quel pion déplace-t-on? ")
@@ -251,12 +256,7 @@ def phasedeux_bleu():
                 break                 # on brise la boucle pour finir le tour
 
 
-
-    # Pions de l'ordinateur.
-def phaseun_rouge():
-    # Je sépare les deux pour que la programmation de l'AI soit plus claire.
-
-    # Rouge = AI
+def phaseun_rouge():        # Déplacement des pions de l'ordinateur.
     NIL_list = []
     NIL = Point('NIL')       # un petit bidouillis pour pouvoir initier la boucle, on initialise un point factice avec une couleur factice pour lancer la boucle. Ce point est ajouté via un faux hexagone (NIL_list) dans la liste des hexagones.
     NIL.changement('N')     # couleur spéciale pour le cas spécial, pour être sûr de ne pas confondre, 'N' est réservé comme état pour les tests et les cas spéciaux comme le point NIL.
@@ -274,8 +274,8 @@ def phaseun_rouge():
     hexagones.remove(NIL_list)      # On veut supprimer le dernier élément de la liste hexagones (NIL_list) puisqu'il n'est plus nécessaire. Pour ne pas perturber les autres fonctions et éviter d'avoir à traiter un cas spécial dans les autres parties du code.           
     journal.append("R:" + hexagones[n][m].name)  # le mouvement est indiqué dans le journal
 
-    # Pions du joueur humain.
-def phaseun_bleu():
+
+def phaseun_bleu():                 # Mise en place des pions du joueur humain.
     while True:
         # interroge sur le pion à placer
         point = raw_input("Sur quel point mettre un pion? ")
@@ -290,62 +290,39 @@ def phaseun_bleu():
             break                     # on brise la boucle pour finir le tour
 
 
-
-    # Mise en place des pions
-def phaseun(quicommence):
-    # Une phase facile à programmer : Les joueurs placent, tour à tour, des pions.
-    # C'est ici que quicommence est traité.
+def phaseun(quicommence):           # Mise en place des pions
     i = 0
-    if quicommence == 1:
-        while i < 14:
+    while i < 14:    
+        if quicommence == 1:
             phaseun_rouge()
             phaseun_bleu()
-            i += 1
-    else:
-        while i < 14:
-            phaseun_rouge()
+        else:
             phaseun_bleu()
-            i += 1
+            phaseun_rouge()
+        i += 1
 
-def phasedeux(quicommence): 
-    # La phase du jeu durant laquelle les joueurs bougent leurs pions.  
-    i = 0
-    if quicommence == 1: 
-        while True:
-            
+
+def phasedeux(quicommence):         # Déplacement des pions
+    while True:
+        if quicommence == 1: 
             phasedeux_rouge()
             phasedeux_bleu()
-            for k in triangles:  
-                for l in k:
-                    if l.moved == 'no': # Il faut mettre à jour le paramètre précédent des points qui n'ont pas bougé (pour permettre de reformer un triangle ou un carré, si on ne le fait pas il est impossible de les reformer, ils sont toujours bloqués). Mais il ne faut pas effacer le fait que certains pions ont bougé, leur état a déjà été changé lors de ce tour.
-                        l.precedent = l.etat
-                    
-                    l.moved = 'no' # On met tous les points à 'no' pour le prochain tour
-            
-    else:   #  il faut faire alterner bleu et rouge au lieu de rouge et bleu
-        while True:
-            
+        else:
             phasedeux_bleu()
             phasedeux_rouge()
-            for k in triangles:  
-                for l in k:
-                    if l.moved == 'no': # Il faut mettre à jour le paramètre précédent des points qui n'ont pas bougé (pour permettre de reformer un triangle ou un carré, si on ne le fait pas il est impossible de les reformer). Mais il ne faut pas effacer le fait que certains pions ont bougé, leur état a été changé lors de ce tour.
-                        l.precedent = l.etat
+        for k in triangles:  
+            for l in k:
+                if l.moved == 'no': # Il faut mettre à jour la variable 'état précédent' des points qui n'ont pas bougé
+                                    # (pour permettre de reformer un triangle ou un carré, si on ne le fait pas il est impossible de les reformer).
+                                    # Mais il ne faut pas effacer le fait que certains pions ont bougé, leur état a été changé lors de ce tour.
+                    l.precedent = l.etat
                     
-                    l.moved = 'no' # On met tous les points à 'no' pour le prochain tour
+                l.moved = 'no' # On met tous les points à 'no' pour le prochain tour
 
 
+# EXÉCUTION PRINCIPALE
 
-    # Le jeu en tant que tel devrait appeler deux boucles principales : Le premier tour, où les joueurs emplissent la planche, et le second, où il s'agit de déplacements.
-
-    # Pile ou face.
-quicommence = randint(0,2)
-phaseun(quicommence) # test de la phase 1, tout devrait fonctionner correctement maintenant.
-
-for k in triangles:  # test pour vérifier l'état des points après la phase 1 (permet de voir si la phase 1 s'est bien déroulée et de tester la phase 2)
-    for l in k:      # On pourrait appeler cette boucle après chaque tour de la phase 2 pour aider le jeu en ligne de commande.
-        print l.name, ':', l.etat, ':',l.precedent
-
-phasedeux(quicommence) # test de la phase 2, il manque le traitement des mouvements forcés et l'intelligence artificielle.
-
-
+quicommence = randint(0,2)      # Pile ou face.
+phaseun(quicommence)            # Tut devrait fonctionner correctement maintenant.
+etatdetous()
+phasedeux(quicommence)          # Ill manque le traitement des mouvements forcés et l'intelligence artificielle.
